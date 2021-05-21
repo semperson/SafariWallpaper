@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>SafariWallpaperPrefs</string>
+	<string>SafariWallpaperPreferences</string>
 	<key>CFBundleIdentifier</key>
 	<string>love.litten.safariwallpaperpreferences</string>
 	<key>CFBundleInfoDictionaryVersion</key>

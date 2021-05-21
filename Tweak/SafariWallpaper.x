@@ -97,7 +97,7 @@
 
 	%orig;
 
-	UILabel* title = MSHookIvar<UILabel *>(self, "_titleLabel");
+	UILabel* title = [self valueForKey:@"_titleLabel"];
 
 	[title setHidden:hideBookmarkHeadersSwitch];
 
@@ -115,7 +115,7 @@
 		return;
 	}
 	
-	UILabel* title = MSHookIvar<UILabel *>(self, "_titleLabel");
+	UILabel* title = [self valueForKey:@"_titleLabel"];
 
 	if (useCustomLabelColorSwitch && !useDynamicLabelColorSwitch)
 		[title setTextColor:[GcColorPickerUtils colorWithHex:customLabelColorValue]];
@@ -127,7 +127,7 @@
 
 	if (!useDynamicLabelColorSwitch) return;
 
-	UILabel* title = MSHookIvar<UILabel *>(self, "_titleLabel");
+	UILabel* title = [self valueForKey:@"_titleLabel"];
 
 	if (isDarkWallpaper)
 		[title setTextColor:[UIColor whiteColor]];
@@ -152,7 +152,7 @@
 
 	%orig;
 
-	VibrantLabelView* title = MSHookIvar<VibrantLabelView *>(self, "_titleLabel");
+	VibrantLabelView* title = [self valueForKey:@"_titleLabel"];
 
 	[title setHidden:hideBookmarkTitlesSwitch];
 
@@ -170,7 +170,7 @@
 		return;
 	}
 	
-	VibrantLabelView* title = MSHookIvar<VibrantLabelView *>(self, "_titleLabel");
+	VibrantLabelView* title = [self valueForKey:@"_titleLabel"];
 
 	if (useCustomLabelColorSwitch && !useDynamicLabelColorSwitch)
 		[title setTextColor:[GcColorPickerUtils colorWithHex:customLabelColorValue]];
@@ -182,7 +182,7 @@
 	
 	if (!useDynamicLabelColorSwitch) return;
 
-	VibrantLabelView* title = MSHookIvar<VibrantLabelView *>(self, "_titleLabel");
+	VibrantLabelView* title = [self valueForKey:@"_titleLabel"];
 
 	if (isDarkWallpaper)
 		[title setTextColor:[UIColor whiteColor]];
@@ -214,7 +214,7 @@
 	[preferences registerBool:&hideBookmarkTitlesSwitch default:NO forKey:@"hideBookmarkTitles"];
 	[preferences registerBool:&useDynamicLabelColorSwitch default:YES forKey:@"useDynamicLabelColor"];
 	[preferences registerBool:&useCustomLabelColorSwitch default:NO forKey:@"useCustomLabelColor"];
-	[preferences registerObject:&customLabelColorValue default:@"00000000" forKey:@"customLabelColor"];
+	[preferences registerObject:&customLabelColorValue default:@"000000" forKey:@"customLabelColor"];
 
 	%init(SafariWallpaper);
 

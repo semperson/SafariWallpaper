@@ -7,7 +7,7 @@
 @interface SAWAppearanceSettings : HBAppearanceSettings
 @end
 
-@interface SAWContributorsSubPrefsListController : HBListController
+@interface SAWContributorsSubPreferencesListController : HBListController
 @property(nonatomic, retain)SAWAppearanceSettings* appearanceSettings;
 @property(nonatomic, retain)UILabel* titleLabel;
 @property(nonatomic, retain)UIBlurEffect* blur;

@@ -4,7 +4,6 @@
 #import <Cephei/HBPreferences.h>
 
 HBPreferences* preferences = nil;
-
 BOOL enabled = NO;
 
 UIImageView* wallpaperView = nil;
@@ -23,7 +22,7 @@ BOOL hideBookmarkHeadersSwitch = NO;
 BOOL hideBookmarkTitlesSwitch = NO;
 BOOL useDynamicLabelColorSwitch = YES;
 BOOL useCustomLabelColorSwitch = NO;
-NSString* customLabelColorValue = @"00000000";
+NSString* customLabelColorValue = @"000000";
 
 @interface CatalogViewController : UIViewController
 @end

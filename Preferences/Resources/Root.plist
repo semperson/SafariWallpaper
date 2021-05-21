@@ -69,8 +69,6 @@
 			<true/>
 			<key>segmentCount</key>
 			<real>9</real>
-			<key>PostNotification</key>
-			<string>love.litten.safariwallpaperpreferences/ReloadPrefs</string>
 		</dict>
 
 		<dict>
@@ -90,8 +88,6 @@
 			<string>useDifferentInterfaceWallpapers</string>
 			<key>label</key>
 			<string>Enable</string>
-			<key>PostNotification</key>
-			<string>love.litten.safariwallpaperpreferences/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -159,8 +155,6 @@
 			<string>hideBookmarks</string>
 			<key>label</key>
 			<string>Hide bookmarks</string>
-			<key>PostNotification</key>
-			<string>love.litten.safariwallpaperpreferences/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -173,8 +167,6 @@
 			<string>hideBookmarkHeaders</string>
 			<key>label</key>
 			<string>Hide bookmark headers</string>
-			<key>PostNotification</key>
-			<string>love.litten.safariwallpaperpreferences/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -187,8 +179,6 @@
 			<string>hideBookmarkTitles</string>
 			<key>label</key>
 			<string>Hide bookmark titles</string>
-			<key>PostNotification</key>
-			<string>love.litten.safariwallpaperpreferences/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -201,8 +191,6 @@
 			<string>useDynamicLabelColor</string>
 			<key>label</key>
 			<string>Dynamic label color</string>
-			<key>PostNotification</key>
-			<string>love.litten.safariwallpaperpreferences/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -215,8 +203,6 @@
 			<string>useCustomLabelColor</string>
 			<key>label</key>
 			<string>Custom label color</string>
-			<key>PostNotification</key>
-			<string>love.litten.safariwallpaperpreferences/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -232,7 +218,7 @@
 			<key>supportsAlpha</key>
 			<false/>
 			<key>fallback</key>
-			<string>00000000</string>
+			<string>000000</string>
 		</dict>
 
 		<dict>
@@ -270,9 +256,9 @@
  			<key>label</key>
  			<string>Contributors</string>
  			<key>detail</key>
- 			<string>SAWContributorsSubPrefsListController</string>
+ 			<string>SAWContributorsSubPreferencesListController</string>
  			<key>SAWSub</key>
- 			<string>contributorsSub</string>
+ 			<string>sub/contributors</string>
  		</dict>
 
 		 <dict>
@@ -289,7 +275,7 @@
 			<key>subtitle</key>
 			<string>Headphone listening mode automations</string>
 			<key>icon</key>
-			<string>Crystal.png</string>
+			<string>featured/Crystal.png</string>
 			<key>url</key>
 			<string>https://repo.litten.love/depictions/cst/</string>
 		</dict>
@@ -301,7 +287,7 @@
 			<key>subtitle</key>
 			<string>Fully featured always on display</string>
 			<key>icon</key>
-			<string>DéjàVu.png</string>
+			<string>featured/DéjàVu.png</string>
 			<key>url</key>
 			<string>https://repo.litten.love/depictions/dvu/</string>
 		</dict>

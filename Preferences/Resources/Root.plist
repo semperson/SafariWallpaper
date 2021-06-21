@@ -100,6 +100,60 @@
 			<key>segmentCount</key>
 			<real>9</real>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>defaults</key>
+			<string>love.litten.safariwallpaperpreferences</string>
+			<key>label</key>
+			<string>Blur:</string>
+			<key>key</key>
+			<string>blurMode</string>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>None</string>
+				<string>Light</string>
+				<string>Dark</string>
+				<string>Adaptive</string>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Blur amount</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>1</real>
+			<key>defaults</key>
+			<string>love.litten.safariwallpaperpreferences</string>
+			<key>key</key>
+			<string>blurAmount</string>
+			<key>min</key>
+			<real>0.1</real>
+			<key>max</key>
+			<real>1</real>
+			<key>showValue</key>
+			<true/>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<real>9</real>
+		</dict>
 
 		<dict>
 			<key>cell</key>

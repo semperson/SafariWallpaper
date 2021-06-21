@@ -6,15 +6,12 @@
 HBPreferences* preferences = nil;
 BOOL enabled = NO;
 
-UIImageView* wallpaperView = nil;
-UIImage* wallpaper = nil;
 BOOL isDarkWallpaper = YES;
 
 // wallpaper
 NSString* wallpaperAlphaValue = @"1.0";
-
-// user interface based wallpaper
-BOOL useDifferentInterfaceWallpapersSwitch = NO;
+NSString* blurModeValue = @"0";
+NSString* blurAmountValue = @"1";
 
 // bookmarks
 BOOL hideBookmarksSwitch = NO;
@@ -25,6 +22,10 @@ BOOL useCustomLabelColorSwitch = NO;
 NSString* customLabelColorValue = @"000000";
 
 @interface CatalogViewController : UIViewController
+@property(nonatomic, retain)UIImageView* safariWallpaperWallpaperView;
+@property(nonatomic, retain)UIImage* safariWallpaperWallpaper;
+@property(nonatomic, retain)UIBlurEffect* safariWallpaperBlur;
+@property(nonatomic, retain)UIVisualEffectView* safariWallpaperBlurView;
 @end
 
 @interface BookmarkFavoritesGridView : UIView

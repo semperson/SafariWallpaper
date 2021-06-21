@@ -4,62 +4,70 @@
 
 %hook CatalogViewController
 
-- (void)viewDidAppear:(BOOL)animated { // add wallpaper
+%property(nonatomic, retain)UIImageView* safariWallpaperWallpaperView;
+%property(nonatomic, retain)UIImage* safariWallpaperWallpaper;
+%property(nonatomic, retain)UIBlurEffect* safariWallpaperBlur;
+%property(nonatomic, retain)UIVisualEffectView* safariWallpaperBlurView;
+
+- (void)viewDidAppear:(BOOL)animated { // add safariwallpaper
 
 	%orig;
 
-	if (!wallpaperView) {
-		wallpaperView = [[UIImageView alloc] initWithFrame:[[self view] bounds]];
-		[wallpaperView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-		[wallpaperView setContentMode:UIViewContentModeScaleAspectFill];
-		[wallpaperView setAlpha:0.0];
+
+	// wallpaper
+	if (![self safariWallpaperWallpaperView]) {
+		self.safariWallpaperWallpaperView = [[UIImageView alloc] initWithFrame:[[self view] bounds]];
+		[[self safariWallpaperWallpaperView] setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+		[[self safariWallpaperWallpaperView] setContentMode:UIViewContentModeScaleAspectFill];
+		[[self safariWallpaperWallpaperView] setAlpha:0.0];
 		if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleLight)
-			wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageLight"];
+			self.safariWallpaperWallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageLight"];
 		else if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleDark)
-			wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageDark"];
+			self.safariWallpaperWallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageDark"];
 	}
-	
-	[wallpaperView setImage:wallpaper];
-	if (![wallpaperView isDescendantOfView:[self view]]) [[self view] insertSubview:wallpaperView atIndex:0];
+	[[self safariWallpaperWallpaperView] setImage:[self safariWallpaperWallpaper]];
+	if (![[self safariWallpaperWallpaperView] isDescendantOfView:[self view]]) [[self view] insertSubview:[self safariWallpaperWallpaperView] atIndex:0];
+
+
+	// blur
+	if ([blurModeValue intValue] != 0 && ![self safariWallpaperBlur]) {
+		if ([blurModeValue intValue] == 1) self.safariWallpaperBlur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        if ([blurModeValue intValue] == 2) self.safariWallpaperBlur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        else if ([blurModeValue intValue] == 3) self.safariWallpaperBlur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+		self.safariWallpaperBlurView = [[UIVisualEffectView alloc] initWithEffect:[self safariWallpaperBlur]];
+		[[self safariWallpaperBlurView] setFrame:[[self safariWallpaperWallpaperView] bounds]];
+        [[self safariWallpaperBlurView] setAlpha:[blurAmountValue doubleValue]];
+	}
+	if (![[self safariWallpaperBlurView] isDescendantOfView:[self safariWallpaperWallpaperView]]) [[self safariWallpaperWallpaperView] addSubview:[self safariWallpaperBlurView]];
+
 
 	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [wallpaperView setAlpha:[wallpaperAlphaValue doubleValue]];
+        [[self safariWallpaperWallpaperView] setAlpha:[wallpaperAlphaValue doubleValue]];
     } completion:nil];
 
-	if (useDynamicLabelColorSwitch && !useCustomLabelColorSwitch && wallpaper) {
-		if ([libKitten isDarkImage:wallpaper]) isDarkWallpaper = YES;
-		else isDarkWallpaper = NO;
+	if (useDynamicLabelColorSwitch && !useCustomLabelColorSwitch && [self safariWallpaperWallpaper]) {
+		isDarkWallpaper = [libKitten isDarkImage:[self safariWallpaperWallpaper]];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"safariWallpaperUpdateDynamicLabelColor" object:nil];
 	}
 
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection { // transition when changing interface mode
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection { // change wallpaper when switching between light and dark mode
 
 	%orig;
 
-	if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleLight) {
-		wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageLight"];
-		[UIView transitionWithView:wallpaperView duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-			[wallpaperView setImage:wallpaper];
-		} completion:nil];
+	if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleLight)
+		self.safariWallpaperWallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageLight"];
+	else if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleDark)
+		self.safariWallpaperWallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageDark"];
 
-		if (useDynamicLabelColorSwitch && !useCustomLabelColorSwitch && wallpaper) {
-			if ([libKitten isDarkImage:wallpaper]) isDarkWallpaper = YES;
-			else isDarkWallpaper = NO;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"safariWallpaperUpdateDynamicLabelColor" object:nil];
-		}
-	} else if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleDark) {
-		wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageDark"];
-		[UIView transitionWithView:wallpaperView duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-			[wallpaperView setImage:wallpaper];
-		} completion:nil];
+	[UIView transitionWithView:[self safariWallpaperWallpaperView] duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+		[[self safariWallpaperWallpaperView] setImage:[self safariWallpaperWallpaper]];
+	} completion:nil];
 
-		if (useDynamicLabelColorSwitch && !useCustomLabelColorSwitch && wallpaper) {
-			if ([libKitten isDarkImage:wallpaper]) isDarkWallpaper = YES;
-			else isDarkWallpaper = NO;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"safariWallpaperUpdateDynamicLabelColor" object:nil];
-		}
+	if (useDynamicLabelColorSwitch && !useCustomLabelColorSwitch && [self safariWallpaperWallpaper]) {
+		isDarkWallpaper = [libKitten isDarkImage:[self safariWallpaperWallpaper]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"safariWallpaperUpdateDynamicLabelColor" object:nil];
 	}
 
 }
@@ -80,11 +88,13 @@
 
 %hook BookmarkFavoritesGridSectionHeaderView
 
-- (id)initWithFrame:(CGRect)frame { // register notification observer
+- (id)initWithFrame:(CGRect)frame { // register a notification observer
+
+	id orig = %orig;
 
 	if (useDynamicLabelColorSwitch && !useCustomLabelColorSwitch) [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDynamicLabelColor) name:@"safariWallpaperUpdateDynamicLabelColor" object:nil];
 
-	return %orig;
+	return orig;
 
 }
 
@@ -135,11 +145,13 @@
 
 %hook BookmarkFavoriteView
 
-- (id)initWithFrame:(CGRect)frame { // register notification observer
+- (id)initWithFrame:(CGRect)frame { // register a notification observer
+
+	id orig = %orig;
 
 	if (useDynamicLabelColorSwitch && !useCustomLabelColorSwitch) [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDynamicLabelColor) name:@"safariWallpaperUpdateDynamicLabelColor" object:nil];
 
-	return %orig;
+	return orig;
 
 }
 
@@ -199,9 +211,8 @@
 
 	// wallpaper
 	[preferences registerObject:&wallpaperAlphaValue default:@"1.0" forKey:@"wallpaperAlpha"];
-
-	// user interface based wallpaper
-	[preferences registerBool:&useDifferentInterfaceWallpapersSwitch default:NO forKey:@"useDifferentInterfaceWallpapers"];
+	[preferences registerObject:&blurModeValue default:@"0" forKey:@"blurMode"];
+	[preferences registerObject:&blurAmountValue default:@"1" forKey:@"blurAmount"];
 
 	// bookmarks
 	[preferences registerBool:&hideBookmarksSwitch default:NO forKey:@"hideBookmarks"];

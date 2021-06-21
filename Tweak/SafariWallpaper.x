@@ -13,14 +13,10 @@
 		[wallpaperView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 		[wallpaperView setContentMode:UIViewContentModeScaleAspectFill];
 		[wallpaperView setAlpha:0.0];
-		if (!useDifferentInterfaceWallpapersSwitch) {
-			wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImage"];
-		} else {
-			if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleLight)
-				wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageLight"];
-			else if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleDark)
-				wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageDark"];
-		}
+		if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleLight)
+			wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageLight"];
+		else if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleDark)
+			wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageDark"];
 	}
 	
 	[wallpaperView setImage:wallpaper];
@@ -42,7 +38,6 @@
 
 	%orig;
 
-	if (!useDifferentInterfaceWallpapersSwitch) return;
 	if ([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleLight) {
 		wallpaper = [GcImagePickerUtils imageFromDefaults:@"love.litten.safariwallpaperpreferences" withKey:@"wallpaperImageLight"];
 		[UIView transitionWithView:wallpaperView duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
@@ -114,11 +109,11 @@
 		[self updateDynamicLabelColor];
 		return;
 	}
-	
-	UILabel* title = [self valueForKey:@"_titleLabel"];
 
-	if (useCustomLabelColorSwitch && !useDynamicLabelColorSwitch)
+	if (useCustomLabelColorSwitch && !useDynamicLabelColorSwitch) {
+		UILabel* title = [self valueForKey:@"_titleLabel"];
 		[title setTextColor:[GcColorPickerUtils colorWithHex:customLabelColorValue]];
+	}
 
 }
 
@@ -169,11 +164,11 @@
 		[self updateDynamicLabelColor];
 		return;
 	}
-	
-	VibrantLabelView* title = [self valueForKey:@"_titleLabel"];
 
-	if (useCustomLabelColorSwitch && !useDynamicLabelColorSwitch)
+	if (useCustomLabelColorSwitch && !useDynamicLabelColorSwitch) {
+		VibrantLabelView* title = [self valueForKey:@"_titleLabel"];
 		[title setTextColor:[GcColorPickerUtils colorWithHex:customLabelColorValue]];
+	}
 
 }
 

@@ -200,7 +200,7 @@
 
 - (void)resetPrompt {
 
-    UIAlertController* resetAlert = [UIAlertController alertControllerWithTitle:@"Safariwallpaper" message:@"Do you really want to reset your preferences?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController* resetAlert = [UIAlertController alertControllerWithTitle:@"SafariWallpaper" message:@"Do you really want to reset your preferences?" preferredStyle:UIAlertControllerStyleActionSheet];
 	
     UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Yaw" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         [self resetPreferences];

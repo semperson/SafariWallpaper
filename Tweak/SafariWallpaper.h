@@ -8,7 +8,7 @@ BOOL enabled = NO;
 
 UIImageView* wallpaperView = nil;
 UIImage* wallpaper = nil;
-BOOL isDarkWallpaper;
+BOOL isDarkWallpaper = YES;
 
 // wallpaper
 NSString* wallpaperAlphaValue = @"1.0";

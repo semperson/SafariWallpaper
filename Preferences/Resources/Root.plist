@@ -25,6 +25,10 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Wallpaper</string>
+			<key>footerText</key>
+			<string>You need at least one bookmark for this to work, you can hide them again with the settings below</string>
+			<key>isStaticText</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -236,6 +240,25 @@
 			<false/>
 			<key>fallback</key>
 			<string>000000</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Miscellaneous</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>love.litten.safariwallpaperpreferences</string>
+			<key>key</key>
+			<string>automaticFocusOnBlankTab</string>
+			<key>label</key>
+			<string>Automatic url bar focus</string>
 		</dict>
 
 		<dict>

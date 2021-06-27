@@ -21,6 +21,9 @@ BOOL useDynamicLabelColorSwitch = YES;
 BOOL useCustomLabelColorSwitch = NO;
 NSString* customLabelColorValue = @"000000";
 
+// miscellaneous
+BOOL automaticFocusOnBlankTabSwitch = NO;
+
 @interface CatalogViewController : UIViewController
 @property(nonatomic, retain)UIImageView* safariWallpaperWallpaperView;
 @property(nonatomic, retain)UIImage* safariWallpaperWallpaper;
@@ -40,4 +43,11 @@ NSString* customLabelColorValue = @"000000";
 
 @interface BookmarkFavoriteView : UIView
 - (void)updateDynamicLabelColor;
+@end
+
+@interface _SFNavigationBar : UINavigationBar
+- (void)_URLTapped:(id)arg1;
+@end
+
+@interface TabDocument : NSObject
 @end

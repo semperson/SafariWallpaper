@@ -1,5 +1,7 @@
 #import "SafariWallpaper.h"
 
+_SFNavigationBar* navigationBar = nil;
+
 %group SafariWallpaper
 
 %hook CatalogViewController
@@ -73,6 +75,10 @@
 }
 
 %end
+
+%end
+
+%group SafariWallpaperBookmarks
 
 %hook BookmarkFavoritesGridView
 
@@ -202,11 +208,45 @@
 
 %end
 
+%group SafariWallpaperMiscellaneous
+
+%hook _SFNavigationBar
+
+- (id)initWithFrame:(CGRect)frame { // get an instance of _SFNavigationBar
+
+	id orig = %orig;
+
+	navigationBar = self;
+
+	return orig;
+
+}
+
+%end
+
+%hook TabDocument
+
+- (void)setActive:(BOOL)arg1 { // automatically focus the url bar
+
+	%orig;
+
+	if (arg1) {
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+			if ([[self valueForKey:@"_isBlank"] boolValue] && ![[self valueForKey:@"_webViewIsLoading"] boolValue]) [navigationBar _URLTapped:nil];
+		});
+	}
+
+}
+
+%end
+
+%end
+
 %ctor {
 
 	preferences = [[HBPreferences alloc] initWithIdentifier:@"love.litten.safariwallpaperpreferences"];
 
-	[preferences registerBool:&enabled default:nil forKey:@"Enabled"];
+	[preferences registerBool:&enabled default:NO forKey:@"Enabled"];
 	if (!enabled) return;
 
 	// wallpaper
@@ -221,7 +261,12 @@
 	[preferences registerBool:&useDynamicLabelColorSwitch default:YES forKey:@"useDynamicLabelColor"];
 	[preferences registerBool:&useCustomLabelColorSwitch default:NO forKey:@"useCustomLabelColor"];
 	[preferences registerObject:&customLabelColorValue default:@"000000" forKey:@"customLabelColor"];
+	
+	// miscellaneous
+	[preferences registerBool:&automaticFocusOnBlankTabSwitch default:NO forKey:@"automaticFocusOnBlankTab"];
 
 	%init(SafariWallpaper);
+	if (hideBookmarksSwitch || hideBookmarkHeadersSwitch || hideBookmarkTitlesSwitch || useDynamicLabelColorSwitch || useCustomLabelColorSwitch) %init(SafariWallpaperBookmarks);
+	if (automaticFocusOnBlankTabSwitch) %init(SafariWallpaperMiscellaneous);
 
 }

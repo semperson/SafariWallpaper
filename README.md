@@ -6,7 +6,7 @@ Personalize Safari with a wallpaper
 2. Install SafariWallpaper
 
 ## Compiling
-  - Depends on libGcUniversal & libKitten
+  - Depends on libGcUniversal and libKitten
   - You may want to edit the `Makefiles` to suit your theos installation
 
 ## Note

@@ -317,7 +317,7 @@
 			<key>icon</key>
 			<string>featured/Crystal.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/cst/</string>
+			<string>https://repo.litten.love/depictions/Crystal/</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -329,7 +329,7 @@
 			<key>icon</key>
 			<string>featured/DéjàVu.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/dvu/</string>
+			<string>https://repo.litten.love/depictions/DejaVu/</string>
 		</dict>
 
 		<dict>

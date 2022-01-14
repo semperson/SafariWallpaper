@@ -1,4 +1,4 @@
-# SafariWallpaper
+# SafariWallpaper 🌇
 Personalize Safari with a wallpaper
 
 ## Installation
